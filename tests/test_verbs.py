@@ -5,7 +5,7 @@ behaviours available to users.
 Copyright (C) 2020 Nicholas H.Tollervey
 """
 import pytest  # type: ignore
-import quart.flask_patch  # type: ignore # noqa
+import quart_flask_patch  # type: ignore # noqa
 from unittest import mock
 from uuid import uuid4
 from textsmith.verbs import Verbs, UnknownVerb

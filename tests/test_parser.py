@@ -4,7 +4,7 @@ Tests for the parser that defines how to process user input.
 Copyright (C) 2020 Nicholas H.Tollervey
 """
 import pytest  # type: ignore
-import quart.flask_patch  # type: ignore # noqa
+import quart_flask_patch  # type: ignore # noqa
 import html
 from unittest import mock
 from uuid import uuid4

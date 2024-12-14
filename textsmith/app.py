@@ -20,7 +20,7 @@ import os
 import sys
 import asyncio
 import structlog  # type: ignore
-import quart.flask_patch  # type: ignore # noqa
+import quart_flask_patch  # type: ignore # noqa
 import uuid
 import asyncio_redis  # type: ignore
 import textsmith.log  # noqa
@@ -44,13 +44,15 @@ from flask_babel import gettext as _  # type: ignore
 from flask_wtf import FlaskForm, RecaptchaField  # type: ignore
 from wtforms import validators  # type: ignore
 from wtforms.fields import PasswordField, BooleanField  # type: ignore
-from wtforms.fields.html5 import EmailField  # type: ignore
+from wtforms.fields import EmailField  # type: ignore
 from functools import wraps
 from textsmith.pubsub import PubSub
 from textsmith.datastore import DataStore
 from textsmith.logic import Logic
 from textsmith.parser import Parser
 
+from dotenv import load_dotenv
+load_dotenv()  # take environment variables from .env
 
 __all__ = ["app"]
 
@@ -218,13 +220,15 @@ async def on_stop() -> None:
     logger.msg("Stopped.")
 
 
-@babel.localeselector
+# https://stackoverflow.com/a/75271637
+#@babel.localeselector
 def get_locale() -> None:
     """
     Get the locale for the current request.
     """
     return request.accept_languages.best_match(["de", "fr", "en"])
 
+babel.init_app(app, locale_selector=get_locale)
 
 # ----------  ERROR HANDLERS
 @app.errorhandler(404)
