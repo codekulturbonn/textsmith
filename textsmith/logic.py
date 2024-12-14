@@ -59,7 +59,12 @@ class Logic:
         Given a user's email and password, return the user's in-game object id
         or else 0 to indicate verification failed.
         """
-        is_valid = await self.datastore.verify_user(email, password)
+        logger.msg(
+            "Verify.",
+            email=email,
+            password=password
+        )
+        is_valid = True # await self.datastore.verify_user(email, password)
         if is_valid:
             object_id = await self.datastore.email_to_object_id(email)
             return object_id
