@@ -22,3 +22,5 @@ recommonmark
 sly
 sphinx
 structlog
+python-dotenv
+quart-flask-patch
